@@ -21,7 +21,7 @@ export const getBannerListThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await quanLyPhimService.getBannerList();
-      console.log(data?.data.content);
+      await handleSleep(2000);
       return data?.data.content;
     } catch (err) {
       return rejectWithValue(err);

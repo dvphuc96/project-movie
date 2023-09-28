@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "store";
-import { getMovieListThunk } from "store/quanLyPhim";
+import { getBannerListThunk, getMovieListThunk } from "store/quanLyPhim";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "constant";
@@ -11,16 +11,21 @@ import { PATH } from "constant";
 export const HomeTemplate = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { movieList, isFetchingMovieList } = useSelector(
+  const { movieList, isFetchingMovieList, bannerList } = useSelector(
     (state: RootState) => state.quanLyPhim
   );
   useEffect(() => {
     dispatch(getMovieListThunk());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getBannerListThunk());
+  }, [dispatch]);
+
   if (isFetchingMovieList) {
     return (
       <>
-        <Banner />
+        <Skeleton.Image className="!w-full !h-[550px]" />
         <div className="grid grid-cols-4">
           {[...Array(12)].map((_, index) => {
             return (
@@ -37,7 +42,7 @@ export const HomeTemplate = () => {
   }
   return (
     <div>
-      <Banner />
+      <Banner banners={bannerList} />
       <div className="container mx-auto mt-[100px]">
         <h2 className="mx-10 font-bold text-30 uppercase">Danh sách phim</h2>
         <div className="grid grid-cols-4">

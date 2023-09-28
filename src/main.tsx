@@ -20,6 +20,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       theme={{
         token: {
           colorPrimary: "#f9ab00",
+          paddingLG: 0,
+        },
+        components: {
+          Tabs: {
+            verticalItemPadding: "0",
+          },
         },
       }}
     >

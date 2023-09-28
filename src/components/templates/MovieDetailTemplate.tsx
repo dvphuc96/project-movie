@@ -37,7 +37,18 @@ export const MovieDetailTemplate = () => {
 
   const items = movieDetail?.heThongRapChieu.map((rapChieu, index) => {
     return {
-      label: <img src={rapChieu.logo} className="w-[50px] h-[50px]" />,
+      label: (
+        <button className="p-[20px]">
+          <span className="w-full items-center inline-flex flex-column justify-center">
+            <div className="w-[50px] h-[50px]">
+              <img
+                src={rapChieu.logo}
+                className="w-full h-full object-cover text-center"
+              />
+            </div>
+          </span>
+        </button>
+      ),
       key: `rap-phim-${index}`,
       children: <ShowtimesTemplate cumRapChieu={rapChieu.cumRapChieu} />,
     };

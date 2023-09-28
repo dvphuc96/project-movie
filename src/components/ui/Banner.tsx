@@ -1,19 +1,10 @@
-import { useEffect } from "react";
-import { RootState, useAppDispatch } from "store";
-import { useSelector } from "react-redux";
-import { getBannerListThunk } from "store/quanLyPhim";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import required modules
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Banner as BannerType } from "types";
 
-export const Banner = () => {
-  const dispatch = useAppDispatch();
-  const { bannerList } = useSelector((state: RootState) => state.quanLyPhim);
-  useEffect(() => {
-    dispatch(getBannerListThunk());
-  }, [dispatch]);
+export const Banner = ({ banners }) => {
   const renderBannerList = () => {
-    return bannerList?.map((banner) => {
+    return banners?.map((banner: BannerType) => {
       return (
         <SwiperSlide key={banner.maPhim}>
           <img src={banner.hinhAnh} alt={banner.hinhAnh} />

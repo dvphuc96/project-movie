@@ -1,37 +1,53 @@
+import { PATH } from "constant";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { DanhSachPhim } from "types";
+import { formatDate } from "utils";
 
 export const DanhSachPhimTemplate = ({ danhSachPhim }) => {
   return (
     <div>
       {danhSachPhim?.map((ele: DanhSachPhim, index: number) => {
-        return <DivCustom key={index}>
+        return (
+          <DivCustom key={index}>
             <div>
-                <img src={ele.hinhAnh} alt={ele.hinhAnh} />
-                <div>
+              <img src={ele.hinhAnh} alt={ele.hinhAnh} />
+              <div>
                 <h2>{ele.tenPhim}</h2>
+                <div className="!grid !grid-cols-2 !px-0">
+                  {(ele.lstLichChieuTheoPhim?.length > 4
+                    ? ele.lstLichChieuTheoPhim.slice(0, 4)
+                    : ele.lstLichChieuTheoPhim
+                  )?.map((phim, index) => {
+                    return (
+                      <ShowTimes key={index}>
+                        <span>C{phim.tenRap.slice(-1)}</span>
+                        <NavLink
+                          to={PATH.purchase.replace(
+                            ":id",
+                            `${phim.maLichChieu}`
+                          )}
+                        >
+                          <p>
+                            {formatDate(phim.ngayChieuGioChieu, "YYYY-MM-DD")}
+                          </p>
+                          <p style={{ color: "gray" }}>&nbsp;~&nbsp;</p>
+                          <p>{formatDate(phim.ngayChieuGioChieu, "HH:mm")}</p>
+                        </NavLink>
+                      </ShowTimes>
+                    );
+                  })}
                 </div>
-                {/* {
-                    ele.lstLichChieuTheoPhim?.map((lichChieu) => {
-                        return (
-                            <div>
-                                <h2><span>C{lichChieu.tenRap.slice(-1)}</span>
-                            {ele.tenPhim}
-                            </h2>
-                            </div>
-                        )
-                    })
-                } */}
+              </div>
             </div>
-        </DivCustom>;
+          </DivCustom>
+        );
       })}
     </div>
   );
 };
 
 const DivCustom = styled.div`
-  width: 540px;
-  border: 1px solid #e0e0e0;
   flex-grow: 1;
   overflow-y: scroll;
   border-left: none;
@@ -44,48 +60,62 @@ const DivCustom = styled.div`
       height: 126px;
     }
     div {
-      width: 555px;
+      display: block;
       padding: 0 20px;
+
       h2 {
         font-size: 18px;
         font-weight: 500;
         line-height: 22px;
         margin-bottom: 8px;
-        span {
-          color: #fff;
-          display: inline-block;
-          padding: 0 5px;
-          font-size: 16px;
-          min-width: 33px;
-          background: #fb4226;
-          text-align: center;
-          margin-right: 8px;
-          border-radius: 4px;
-        }
-      }
-      div {
-        display: flex;
-        flex-wrap: wrap;
-        a {
-          color: #9e9e9e;
-          width: 45%;
-          border: 1px solid #e4e4e4;
-          cursor: pointer;
-          margin: 0px 16px 16px 0px;
-          padding: 8px;
-          border-radius: 4px;
-          text-decoration: none;
-          background-color: rgba(246, 246, 246, 0.5);
-          p:first-child {
-            color: #e99f00;
-            font-size: 14px;
-            font-weight: 500;
-          }
-          p:last-child {
-            color: #fa5238;
-          }
-        }
+        width: 100%;
       }
     }
+  }
+  > div {
+    &::after {
+      width: 80%;
+      bottom: 0;
+      height: 1px;
+      content: "";
+      display: block;
+      position: absolute;
+      background: rgba(238, 238, 238, 0.88);
+    }
+  }
+`;
+
+const ShowTimes = styled.div`
+  color: #9e9e9e;
+  border: 1px solid #e4e4e4;
+  cursor: pointer;
+  margin: 0px 16px 16px 0px;
+  padding: 5px 15px !important;
+  border-radius: 4px;
+  text-decoration: none;
+  background-color: rgba(246, 246, 246, 0.5);
+  span {
+    color: #fff;
+    display: inline-block;
+    padding: 0 5px;
+    font-size: 16px;
+    min-width: 33px;
+    background: #fb4226;
+    text-align: center;
+    margin-right: 8px;
+    border-radius: 4px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  p:first-child {
+    color: #e99f00;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  p:last-child {
+    color: #fa5238;
   }
 `;

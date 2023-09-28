@@ -1,60 +1,62 @@
 import { Tabs } from "antd";
 import { DanhSachPhimTemplate } from "components";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "store";
-import { getLstCumRapThunk } from "store/quanLyRap";
+import { RootState } from "store";
 import styled from "styled-components";
 
-type cumRapProps = {
-  maHeThongRap: string;
-};
-
-export const LstCumRapTemplate = (props: cumRapProps) => {
-  const dispatch = useAppDispatch();
-  const { lstCumRap, isFetchingLstCumRap } = useSelector(
-    (state: RootState) => state.quanLyRap
-  );
-  useEffect(() => {
-    dispatch(getLstCumRapThunk(props.maHeThongRap));
-  }, [dispatch, props.maHeThongRap]);
-  console.log('props', props.maHeThongRap)
-  // const items = [];
-  // lstCumRap?.forEach((cumRap) => {
-  //   return cumRap?.lstCumRap?.map((element, index) => {
-  //     const cumRapObj = {
-  //       label: (
-  //         <ButtonCustom>
-  //           <span>
-  //             <div>
-  //               <h4>{element.tenCumRap}</h4>
-  //               <h6>{element.diaChi}</h6>
-  //               <p>[chi tiết]</p>
-  //             </div>
-  //           </span>
-  //         </ButtonCustom>
-  //       ),
-  //       key: `cum-rap-${index}`,
-  //       children: <DanhSachPhimTemplate danhSachPhim={element.danhSachPhim} />,
-  //     };
-  //     items.push(cumRapObj);
-  //   });
-  // });
-  // const renderLstCumRap = () => {
-  //   return <Tabs tabPosition="left" items={items} style={{
-  //       maxHeight: "600px",
-  //       overflowY: "scroll",
-  //   }}></Tabs>;
-  // };
-  // return <div>{renderLstCumRap()}</div>;
+export const LstCumRapTemplate = () => {
+  const { lstCumRap } = useSelector((state: RootState) => state.quanLyRap);
+  const items = [];
+  lstCumRap?.forEach((cumRap) => {
+    return cumRap?.lstCumRap?.map((element, index) => {
+      const cumRapObj = {
+        label: (
+          <ButtonCustom>
+            <span>
+              <div>
+                <h4>{element.tenCumRap.substring(0,30)}...</h4>
+                <h6>{element.diaChi}</h6>
+                <p>[chi tiết]</p>
+              </div>
+            </span>
+          </ButtonCustom>
+        ),
+        key: `cum-rap-${index}`,
+        children: <DanhSachPhimTemplate danhSachPhim={element.danhSachPhim} />,
+      };
+      items.push(cumRapObj);
+    });
+  });
+  const renderLstCumRap = () => {
+    return (
+      <Tabs
+        tabPosition="left"
+        items={items}
+        style={{
+          height: "656px",
+          overflowY: "scroll",
+        }}
+      ></Tabs>
+    );
+  };
+  return <div>{renderLstCumRap()}</div>;
 };
 
 const ButtonCustom = styled.button`
   width: 280px;
   height: 90px;
-  padding: 0 !important;
+  padding: 20px 15px 15px 20px;
   position: relative;
   text-align: left;
+  &::after {
+    width: 80%;
+    bottom: 0;
+    height: 1px;
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(238,238,238,.88);
+  }
   span {
     display: unset;
     width: 100%;

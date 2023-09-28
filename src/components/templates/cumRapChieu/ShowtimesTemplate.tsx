@@ -9,7 +9,7 @@ export const ShowtimesTemplate = ({ cumRapChieu }) => {
     <div className="col-span-4 !text-white overflow-y-scroll h-[425px]">
       {cumRapChieu.map((item: CumRapChieu, index: number) => {
         return (
-          <div key={index} className="p-8">
+          <div key={index} className="px-[20px]">
             <h3 className="text-16 text-[#f9ab00]">{item.tenCumRap}</h3>
             <div className="grid grid-cols-2">
               {item.lichChieuPhim.map((info, index) => {

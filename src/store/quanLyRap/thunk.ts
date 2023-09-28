@@ -21,7 +21,6 @@ export const getCinemaListThunk = createAsyncThunk(
     try {
       const data = await quanLyRapService.getCinemaList();
       await handleSleep(1500);
-      console.log('1', data.data.content)
       return data.data.content;
     } catch (err) {
       return rejectWithValue(err);
@@ -35,7 +34,6 @@ export const getLstCumRapThunk = createAsyncThunk(
     try {
       const data = await quanLyRapService.getLstCumRap(maHeThongRap);
       handleSleep(2000);
-      console.log('2', data.data.content)
       return data.data.content;
     } catch (err) {
       return rejectWithValue(err);
