@@ -20,20 +20,21 @@ export const DanhSachPhimTemplate = ({ danhSachPhim }) => {
                     : ele.lstLichChieuTheoPhim
                   )?.map((phim, index) => {
                     return (
-                      <ShowTimes key={index}>
+                      <ShowTimes
+                        key={index}
+                        href={PATH.purchase.replace(
+                          ":id",
+                          `${phim.maLichChieu}`
+                        )}
+                      >
                         <span>C{phim.tenRap.slice(-1)}</span>
-                        <NavLink
-                          to={PATH.purchase.replace(
-                            ":id",
-                            `${phim.maLichChieu}`
-                          )}
-                        >
+                        <div>
                           <p>
                             {formatDate(phim.ngayChieuGioChieu, "YYYY-MM-DD")}
                           </p>
                           <p style={{ color: "gray" }}>&nbsp;~&nbsp;</p>
                           <p>{formatDate(phim.ngayChieuGioChieu, "HH:mm")}</p>
-                        </NavLink>
+                        </div>
                       </ShowTimes>
                     );
                   })}
@@ -85,15 +86,15 @@ const DivCustom = styled.div`
   }
 `;
 
-const ShowTimes = styled.div`
+const ShowTimes = styled.a`
   color: #9e9e9e;
   border: 1px solid #e4e4e4;
   cursor: pointer;
   margin: 0px 16px 16px 0px;
-  padding: 5px 15px !important;
+  padding: 3px 15px !important;
   border-radius: 4px;
-  text-decoration: none;
-  background-color: rgba(246, 246, 246, 0.5);
+  text-decoration: none !important;
+  background-color: rgba(246, 246, 246, 0.5) !important;
   span {
     color: #fff;
     display: inline-block;
@@ -105,10 +106,11 @@ const ShowTimes = styled.div`
     margin-right: 8px;
     border-radius: 4px;
   }
-  a {
-    display: flex;
+  div {
+    display: flex !important;
     align-items: center;
     text-decoration: none;
+    padding: 0 !important;
   }
   p:first-child {
     color: #e99f00;

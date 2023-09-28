@@ -15,7 +15,7 @@ export default defineConfig({
       constant: path.resolve(__dirname, "./src/constant"),
       hooks: path.resolve(__dirname, "./src/hooks"),
       pages: path.resolve(__dirname, "./src/pages"),
-      // redux: path.resolve(__dirname, "./src/redux"),
+      guards: path.resolve(__dirname, "./src/guards"),
       router: path.resolve(__dirname, "./src/router"),
       schema: path.resolve(__dirname, "./src/schema"),
       services: path.resolve(__dirname, "./src/services"),

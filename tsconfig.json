@@ -24,15 +24,15 @@
       "assets": ["assets"],
       "components": ["components"],
       "constant": ["constant"],
+      "guards": ["guards"],
       "hooks": ["hooks"],
       "pages": ["pages"],
-      // "redux": ["redux"],
       "router": ["router"],
       "schema": ["schema"],
       "services": ["services"],
       "types": ["types"],
       "utils": ["utils"],
-      "store": ["store"],
+      "store": ["store"]
     }
   },
   "include": ["src"],

@@ -4,3 +4,4 @@ export * from "./Home";
 export * from "./MovieDetail";
 export * from "./Account";
 export * from "./Cinema";
+export * from "./Purchase";

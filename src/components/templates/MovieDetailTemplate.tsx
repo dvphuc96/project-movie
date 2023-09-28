@@ -1,18 +1,12 @@
 import { ShowtimesTemplate } from "components";
-import {
-  Button,
-  Card,
-  ModalVideo,
-  Skeleton,
-  Tabs,
-} from "components/ui";
+import { Button, Loading, ModalVideo, Tabs } from "components/ui";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RootState, useAppDispatch } from "store";
 import { getMovieDetailThunk } from "store/quanLyRap";
-import { formatDate } from "utils";
+import { formatDate, handleLoading } from "utils";
 
 export const MovieDetailTemplate = () => {
   const { id } = useParams<string>();
@@ -24,7 +18,7 @@ export const MovieDetailTemplate = () => {
   useEffect(() => {
     dispatch(getMovieDetailThunk(id));
   }, [id, dispatch]);
-
+  handleLoading(isFetchingMovieDetail);
   const checkLength = () => {
     if (movieDetail?.trailer.includes("https://www.youtube.com/")) {
       return false;
@@ -32,8 +26,8 @@ export const MovieDetailTemplate = () => {
     return true;
   };
   const alertChooseCinema = () => {
-    toast.warning('Vui lòng chọn rạp chiếu');
-  }
+    toast.warning("Vui lòng chọn rạp chiếu");
+  };
 
   const items = movieDetail?.heThongRapChieu.map((rapChieu, index) => {
     return {
@@ -57,57 +51,7 @@ export const MovieDetailTemplate = () => {
     return <Tabs tabPosition="left" items={items} />;
   };
   if (isFetchingMovieDetail) {
-    return (
-      <div className="container mx-auto mt-[100px]">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="col-span-1 px-[15px]">
-            <Card className="!w-[350px] mt-20">
-              <Skeleton.Image className=" !w-full !h-[325px]" />
-              <Skeleton.Input className="!w-full mt-16" />
-            </Card>
-          </div>
-          <div className="col-span-1 px-[15px]">
-            <div className="flex">
-              <div className="flex relative flex-none items center">
-                <div className="flex flex-col">
-                  <div className="px-8 pb-[40px] text-center">
-                    <Skeleton.Image className="!max-w-full !h-auto w-[50px] rounded-6" />
-                  </div>
-                  <div className="px-8 pb-[40px] text-center">
-                    <Skeleton.Image className="!max-w-full !h-auto w-[50px] rounded-6" />
-                  </div>
-                  <div className="px-8 pb-[40px] text-center">
-                    <Skeleton.Image className="!max-w-full !h-auto w-[50px] rounded-6" />
-                  </div>
-                  <div className="px-8 pb-[40px] text-center">
-                    <Skeleton.Image className="!max-w-full !h-auto w-[50px] rounded-6" />
-                  </div>
-                  <div className="px-8 pb-[40px] text-center">
-                    <Skeleton.Image className="!max-w-full !h-auto w-[50px] rounded-6" />
-                  </div>
-                </div>
-                <div className="!w-[410px]">
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                  <Skeleton.Button className="!px-[15px] !py-[3px] !w-[150px] !h-[45px] mt-0 ml-[16px] mb-[16px] mr-0" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <>
@@ -171,9 +115,9 @@ export const MovieDetailTemplate = () => {
                       <li className="mt-10">120 phút</li>
                     </ul>
                   </div>
-                  <Button 
-                  className="!mt-20 !text-white !bg-red-500 !hover:bg-red-700	!px-[20px] !rounded-6 !cursor-pointer !border-red-500"
-                  onClick={() => alertChooseCinema()}
+                  <Button
+                    className="!mt-20 !text-white !bg-red-500 !hover:bg-red-700	!px-[20px] !rounded-6 !cursor-pointer !border-red-500"
+                    onClick={() => alertChooseCinema()}
                   >
                     Mua vé
                   </Button>

@@ -1,5 +1,4 @@
 import { PATH } from "constant";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { CumRapChieu } from "types";
 import { formatDate } from "utils";
@@ -14,16 +13,18 @@ export const ShowtimesTemplate = ({ cumRapChieu }) => {
             <div className="grid grid-cols-2">
               {item.lichChieuPhim.map((info, index) => {
                 return (
-                  <DivInfo key={index} background="#fff">
+                  <LinkCustom
+                    key={index}
+                    background="#fff"
+                    href={PATH.purchase.replace(":id", info.maLichChieu)}
+                  >
                     <span>C{info.tenRap.slice(-1)}</span>
-                    <NavLink
-                      to={PATH.purchase.replace(":id", info.maLichChieu)}
-                    >
+                    <div>
                       <p>{formatDate(info.ngayChieuGioChieu, "YYYY-MM-DD")}</p>
                       <p style={{ color: "gray" }}>&nbsp;~&nbsp;</p>
                       <p>{formatDate(info.ngayChieuGioChieu, "HH:mm")}</p>
-                    </NavLink>
-                  </DivInfo>
+                    </div>
+                  </LinkCustom>
                 );
               })}
             </div>
@@ -37,15 +38,15 @@ export const ShowtimesTemplate = ({ cumRapChieu }) => {
 type DivInfoProps = {
   background?: string;
 };
-export const DivInfo = styled.div<DivInfoProps>`
-  color: #9e9e9e;
+export const LinkCustom = styled.a<DivInfoProps>`
+  color: #9e9e9e !important;
   border: 1px solid #e4e4e4;
-  cursor: pointer;
+  cursor: pointer !important;
   margin: 0px 16px 16px 0px;
   padding: 3px 15px;
   border-radius: 4px;
-  text-decoration: none;
-  background-color: ${(props) => props.background || "#000"};
+  text-decoration: none !important;
+  background-color: ${(props) => props.background || "#000"} !important;
   span {
     color: #fff;
     display: inline-block;
@@ -57,7 +58,7 @@ export const DivInfo = styled.div<DivInfoProps>`
     margin-right: 8px;
     border-radius: 4px;
   }
-  a {
+  div {
     display: flex;
     align-items: center;
     text-decoration: none;

@@ -41,6 +41,9 @@ extension: vscode-styled-components
 <!-- react-query -->
 18: yarn add react-query
 
+<!-- icons -->
+19: yarn add @ant-design/icons
+
 // muốn sử dụng alias thì trong mỗi thư mục phải tạo 1 file index.ts
 như trong folder components thì phải có index.ts
 rồi trong components có thư mục layouts thì trog layout cũng phải có index.ts

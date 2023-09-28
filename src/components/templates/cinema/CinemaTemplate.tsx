@@ -3,12 +3,15 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "store";
 import { getCinemaListThunk, getLstCumRapThunk } from "store/quanLyRap";
-import { LstCumRapTemplate } from "components";
+import { Loading, LstCumRapTemplate } from "components";
 import styled from "styled-components";
+import { handleLoading } from "utils";
 
 export const CinemaTemplate = () => {
   const dispatch = useAppDispatch();
-  const { cinemaList } = useSelector((state: RootState) => state.quanLyRap);
+  const { cinemaList, isFetchingCinema } = useSelector(
+    (state: RootState) => state.quanLyRap
+  );
   useEffect(() => {
     dispatch(getCinemaListThunk());
   }, [dispatch]);
@@ -50,6 +53,10 @@ export const CinemaTemplate = () => {
       />
     );
   };
+  handleLoading(isFetchingCinema);
+  if (isFetchingCinema) {
+    return <Loading />;
+  }
   return (
     <div className="container mx-auto mt-[40px] max-w-[960px] border border-inherit">
       {renderCinemaList()}

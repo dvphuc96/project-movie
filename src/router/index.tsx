@@ -1,7 +1,8 @@
 import { RouteObject } from "react-router-dom";
 import { PATH } from "constant";
 import { AuthLayout, MainLayout } from "components";
-import { Home, Login, Register, MovieDetail, Account, Cinema } from "pages";
+import { Home, Login, Register, MovieDetail, Account, Cinema, Purchase } from "pages";
+import { AuthGuard } from "guards";
 
 export const router: RouteObject[] = [
   {
@@ -36,6 +37,14 @@ export const router: RouteObject[] = [
       {
         path: PATH.cinema,
         element: <Cinema />,
+      },
+      {
+        path: PATH.purchase,
+        element: (
+          <AuthGuard>
+            <Purchase />
+          </AuthGuard>
+        )
       },
     ],
   },

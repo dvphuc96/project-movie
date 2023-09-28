@@ -1,4 +1,4 @@
-import { Banner, Card, Skeleton } from "components";
+import { Banner, Card, Loading } from "components";
 import { Button } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { getBannerListThunk, getMovieListThunk } from "store/quanLyPhim";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "constant";
+import { handleLoading } from "utils";
 
 export const HomeTemplate = () => {
   const dispatch = useAppDispatch();
@@ -21,24 +22,9 @@ export const HomeTemplate = () => {
   useEffect(() => {
     dispatch(getBannerListThunk());
   }, [dispatch]);
-
+  handleLoading(isFetchingMovieList);
   if (isFetchingMovieList) {
-    return (
-      <>
-        <Skeleton.Image className="!w-full !h-[550px]" />
-        <div className="grid grid-cols-4">
-          {[...Array(12)].map((_, index) => {
-            return (
-              <Card className="!w-[350px] mt-20" key={index}>
-                <Skeleton.Image className="!w-full !h-[250px]" />
-                <Skeleton.Input className="!w-full mt-16" />
-                <Skeleton.Input className="!w-full mt-16" />
-              </Card>
-            );
-          })}
-        </div>
-      </>
-    );
+    return <Loading />;
   }
   return (
     <div>
