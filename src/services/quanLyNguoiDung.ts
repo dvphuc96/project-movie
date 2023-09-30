@@ -1,4 +1,4 @@
-import { apiInstance } from "constant/apiInstance";
+import { apiInstance } from "constant";
 import { RegisterSchemaType, LoginSchemaType, UpdateAccountSchemaType } from "schema";
 import { UserByAccessToken, UserLogin } from "types";
 

@@ -39,11 +39,16 @@ extension: vscode-styled-components
 17. swiper yarn add swiper
 
 <!-- react-query -->
-18: yarn add react-query
+18. yarn add @tanstack/react-query
 
 <!-- icons -->
-19: yarn add @ant-design/icons
+19. yarn add @ant-design/icons
 
+<!-- sass -->
+20. yarn add sass
+
+<!-- sweetalert2 -->
+21. yarn add sweetalert2
 // muốn sử dụng alias thì trong mỗi thư mục phải tạo 1 file index.ts
 như trong folder components thì phải có index.ts
 rồi trong components có thư mục layouts thì trog layout cũng phải có index.ts

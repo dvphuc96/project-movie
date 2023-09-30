@@ -3,3 +3,4 @@ export * from "./sleep";
 export * from "./config";
 export * from "./formatDate";
 export * from "./handleLoading";
+export * from "./styled";

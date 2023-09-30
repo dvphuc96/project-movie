@@ -28,4 +28,3 @@ export const getBannerListThunk = createAsyncThunk(
     }
   }
 );
-

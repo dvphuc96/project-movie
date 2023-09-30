@@ -11,5 +11,3 @@ export const quanLyRapService = {
   getCinemaList: () => api.get<ApiResponse<Cinema[]>>('LayThongTinHeThongRap'),
   getLstCumRap: (maHeThongRap = "") => api.get<ApiResponse<LstCumRap[]>>(`LayThongTinLichChieuHeThongRap?maHeThongRap=${maHeThongRap}&maNhom=GP08`),
 };
-
-

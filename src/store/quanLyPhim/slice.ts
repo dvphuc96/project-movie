@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Banner, Movie, MovieDetail } from "types";
-import {
-  getBannerListThunk,
-  getMovieListThunk,
-} from "./thunk";
+import { getBannerListThunk, getMovieListThunk } from "./thunk";
 
 type QuanLyPhimInitialState = {
   movieList?: Movie[];
@@ -42,7 +39,7 @@ const quanLyPhimSlice = createSlice({
       })
       .addCase(getBannerListThunk.rejected, (state) => {
         state.isFetchingBannerList = false;
-      })
+      });
   },
 });
 export const { actions: quanLyPhimSliceActions, reducer: quanLyPhimReducer } =
