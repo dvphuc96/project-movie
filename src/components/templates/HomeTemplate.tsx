@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "constant";
 import { handleLoading } from "utils";
+import { Movie } from "types";
 
 export const HomeTemplate = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ export const HomeTemplate = () => {
       <div className="container mx-auto mt-[100px]">
         <h2 className="mx-10 font-bold text-30 uppercase">Danh sách phim</h2>
         <div className="grid grid-cols-4">
-          {movieList?.map((movie, index) => {
+          {movieList?.map((movie: Movie, index: number) => {
             return (
               <Card
                 key={index}

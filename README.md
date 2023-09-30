@@ -49,6 +49,10 @@ extension: vscode-styled-components
 
 <!-- sweetalert2 -->
 21. yarn add sweetalert2
+
+<!-- redux-persist -->
+21 yarn add redux-persist
+
 // muốn sử dụng alias thì trong mỗi thư mục phải tạo 1 file index.ts
 như trong folder components thì phải có index.ts
 rồi trong components có thư mục layouts thì trog layout cũng phải có index.ts

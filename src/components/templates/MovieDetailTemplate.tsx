@@ -6,12 +6,13 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RootState, useAppDispatch } from "store";
 import { getMovieDetailThunk } from "store/quanLyRap";
+import { HeThongRapChieu } from "types";
 import { formatDate, handleLoading } from "utils";
 
 export const MovieDetailTemplate = () => {
   const { id } = useParams<string>();
   const dispatch = useAppDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { movieDetail, isFetchingMovieDetail } = useSelector(
     (state: RootState) => state.quanLyRap
   );
@@ -19,17 +20,17 @@ export const MovieDetailTemplate = () => {
     dispatch(getMovieDetailThunk(id));
   }, [id, dispatch]);
   handleLoading(isFetchingMovieDetail);
-  const checkLength = () => {
+  const checkLength = (): boolean => {
     if (movieDetail?.trailer.includes("https://www.youtube.com/")) {
       return false;
     }
     return true;
   };
-  const alertChooseCinema = () => {
+  const alertChooseCinema = (): void => {
     toast.warning("Vui lòng chọn rạp chiếu");
   };
 
-  const items = movieDetail?.heThongRapChieu.map((rapChieu, index) => {
+  const items = movieDetail?.heThongRapChieu.map((rapChieu:HeThongRapChieu, index:number) => {
     return {
       label: (
         <button className="p-[20px]">
@@ -47,7 +48,7 @@ export const MovieDetailTemplate = () => {
       children: <ShowtimesTemplate cumRapChieu={rapChieu.cumRapChieu} />,
     };
   });
-  const renderHeThongRap = () => {
+  const renderHeThongRap = (): JSX.Element => {
     return <Tabs tabPosition="left" items={items} />;
   };
   if (isFetchingMovieDetail) {

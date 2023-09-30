@@ -1,9 +1,9 @@
 import { PATH } from "constant";
 import styled from "styled-components";
-import { CumRapChieu } from "types";
+import { CumRapChieu, LichChieuPhim } from "types";
 import { formatDate } from "utils";
 
-export const ShowtimesTemplate = ({ cumRapChieu }) => {
+export const ShowtimesTemplate = ({cumRapChieu}): JSX.Element => {
   return (
     <div className="col-span-4 !text-white overflow-y-scroll h-[425px]">
       {cumRapChieu.map((item: CumRapChieu, index: number) => {
@@ -11,7 +11,7 @@ export const ShowtimesTemplate = ({ cumRapChieu }) => {
           <div key={index} className="px-[20px]">
             <h3 className="text-16 text-[#f9ab00]">{item.tenCumRap}</h3>
             <div className="grid grid-cols-2">
-              {item.lichChieuPhim.map((info, index) => {
+              {item.lichChieuPhim.map((info:LichChieuPhim, index:number) => {
                 return (
                   <LinkCustom
                     key={index}

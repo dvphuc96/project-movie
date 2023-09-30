@@ -25,23 +25,28 @@ import { notification } from "antd";
 import { quanLyDatVeService } from "services";
 import Swal from "sweetalert2";
 import { PATH } from "constant";
-
+import { DanhSachGhe } from "types";
+type itemProps = {
+  title: string;
+  info: string;
+  gioChieu: undefined | string;
+};
 export const PurchaseTemplate = () => {
   const { id } = useParams<string>();
-  const [chairList, setChairList] = useState([]);
+  const [chairList, setChairList] = useState<DanhSachGhe[]>([]);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { ticketRoomList, isFetchingTicketRoomList } = useSelector(
     (state: RootState) => state.quanLyDatVe
   );
-  useEffect(() => {
+  useEffect((): void => {
     dispatch(getTicketRoomListThunk(id));
   }, [id, dispatch]);
   handleLoading(isFetchingTicketRoomList);
   if (isFetchingTicketRoomList) {
     return <Loading />;
   }
-  const handleBookTicket = async () => {
+  const handleBookTicket = async (): Promise<void> => {
     const data = {
       maLichChieu: +id,
       danhSachVe: chairList.map((element) => {
@@ -60,12 +65,12 @@ export const PurchaseTemplate = () => {
         icon: "success",
         confirmButtonText: "Đồng ý",
       });
-      navigate(PATH.account)
+      navigate(PATH.account);
     } catch (err) {
       handleError(err);
     }
   };
-  const renderChairList = () => {
+  const renderChairList = (): JSX.Element[] => {
     return ticketRoomList?.danhSachGhe?.map((chair, index) => {
       return (
         <ButtonChair
@@ -83,6 +88,7 @@ export const PurchaseTemplate = () => {
           //   setChairList([...chairList]);
           // }}
           onClick={() =>
+            // Được dùng khi thay đổi trực tiếp của state hiện tại
             setChairList((preState) => {
               // chọn full ghế
               // const index = chairList.findIndex(
@@ -114,7 +120,7 @@ export const PurchaseTemplate = () => {
       );
     });
   };
-  const renderTotalPrice = () => {
+  const renderTotalPrice = (): string => {
     const total = chairList.reduce((total, element) => {
       total += element.giaVe;
       return total;
@@ -177,7 +183,7 @@ export const PurchaseTemplate = () => {
             </p>
           </DivPadding>
           <Divider />
-          {items?.map((item, index) => {
+          {items?.map((item: itemProps, index: number) => {
             return (
               <div key={index}>
                 <DivCinema>
@@ -198,7 +204,7 @@ export const PurchaseTemplate = () => {
           <DivCinema>
             <Title>Ghế: </Title>
             <Info>
-              {chairList?.map((ele, index) => {
+              {chairList?.map((ele: DanhSachGhe, index: number) => {
                 return <span key={index}>Ghế {ele.tenGhe}, </span>;
               })}
             </Info>

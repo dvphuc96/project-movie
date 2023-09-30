@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import styled from "styled-components";
 
 export const ModalVideo = ({ videoUrl, isOpen, onClose }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const handleVideoClose = () => {
     setIsPlaying(!isPlaying);
   };
