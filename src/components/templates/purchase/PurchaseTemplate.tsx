@@ -33,7 +33,7 @@ type itemProps = {
 };
 export const PurchaseTemplate = () => {
   const { id } = useParams<string>();
-  const [chairList, setChairList] = useState<DanhSachGhe[]>([]);
+  const [chairList, setChairList] = useState([]);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { ticketRoomList, isFetchingTicketRoomList } = useSelector(
