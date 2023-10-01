@@ -44,12 +44,6 @@ export const Header = () => {
             <NavLink to={PATH.cinema}>RẠP</NavLink>
             <NavLink to="">TIN TỨC</NavLink>
           </nav>
-          <div className="search">
-            <Input placeholder="Tìm kiếm tên phim" />
-            <Button>
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </Button>
-          </div>
           <div>
             {!accessToken && (
               <p className="flex items-center font-600">
@@ -159,31 +153,6 @@ const Container = styled.header`
           }
         }
       }
-    }
-
-    .search {
-      border: 1px solid #111;
-      display: flex;
-      align-items: center;
-      border-radius: 6px;
-      overflow: hidden;
-      button {
-        height: 46px !important;
-        border: none;
-        border-radius: initial;
-        background: #111;
-        color: #fff;
-        &:hover {
-          color: var(--primary-color) !important;
-        }
-      }
-    }
-
-    input {
-      margin-top: 0;
-      background: transparent;
-      color: #111;
-      outline: none;
     }
   }
 `;

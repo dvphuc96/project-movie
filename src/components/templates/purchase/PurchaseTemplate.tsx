@@ -26,6 +26,7 @@ import { quanLyDatVeService } from "services";
 import Swal from "sweetalert2";
 import { PATH } from "constant";
 import { DanhSachGhe } from "types";
+import { getUserByAccessTokenThunk } from "store/quanLyNguoiDung/thunk";
 type itemProps = {
   title: string;
   info: string;
@@ -65,6 +66,7 @@ export const PurchaseTemplate = () => {
         icon: "success",
         confirmButtonText: "Đồng ý",
       });
+      dispatch(getUserByAccessTokenThunk());
       navigate(PATH.account);
     } catch (err) {
       handleError(err);

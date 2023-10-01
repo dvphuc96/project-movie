@@ -12,28 +12,31 @@ import { StyleProvider } from "@ant-design/cssinjs";
 import { store } from "store";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
+import { Suspense } from "react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <ToastContainer />
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#f9ab00",
-          paddingLG: 0,
-        },
-        components: {
-          Tabs: {
-            verticalItemPadding: "0",
+    <Suspense fallback={<></>}>
+      <ToastContainer />
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#f9ab00",
+            paddingLG: 0,
           },
-        },
-      }}
-    >
-      <StyleProvider hashPriority="high">
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </StyleProvider>
-    </ConfigProvider>
+          components: {
+            Tabs: {
+              verticalItemPadding: "0",
+            },
+          },
+        }}
+      >
+        <StyleProvider hashPriority="high">
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </StyleProvider>
+      </ConfigProvider>
+    </Suspense>
   </BrowserRouter>
 );
