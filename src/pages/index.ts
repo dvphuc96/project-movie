@@ -5,3 +5,4 @@ export * from "./MovieDetail";
 export * from "./Account";
 export * from "./Cinema";
 export * from "./Purchase";
+export * from "./admin"

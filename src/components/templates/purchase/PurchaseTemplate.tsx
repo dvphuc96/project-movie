@@ -65,9 +65,11 @@ export const PurchaseTemplate = () => {
         text: "Kiểm tra trong lịch sử đặt vé",
         icon: "success",
         confirmButtonText: "Đồng ý",
+        willClose: () => {
+          dispatch(getUserByAccessTokenThunk());
+          navigate(PATH.account);
+        },
       });
-      dispatch(getUserByAccessTokenThunk());
-      navigate(PATH.account);
     } catch (err) {
       handleError(err);
     }

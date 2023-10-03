@@ -1,8 +1,8 @@
 import { RouteObject } from "react-router-dom";
 import { PATH } from "constant";
-import { AuthLayout, MainLayout } from "components";
+import { AdminLayout, AuthLayout, MainLayout } from "components";
 import { Home, Login, Register, MovieDetail, Account, Cinema, Purchase } from "pages";
-import { AuthGuard } from "guards";
+import { AdminGuard, AuthGuard } from "guards";
 
 export const router: RouteObject[] = [
   {
@@ -48,4 +48,17 @@ export const router: RouteObject[] = [
       },
     ],
   },
+  {
+    path: '/admin',
+    element: (
+      <AdminGuard>
+        <AdminLayout/>
+      </AdminGuard>
+    ),
+    children: [
+      {
+        index: true,
+      }
+    ]
+  }
 ];
