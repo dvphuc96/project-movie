@@ -33,7 +33,6 @@ export const AdminLayout = () => {
         <DivLogout>
           <button
             onClick={() => {
-              storage.save("LogoutFromAdmin", true);
               dispatch(quanLyNguoiDungActions.logOut("logOut"));
             }}
           >

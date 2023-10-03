@@ -34,12 +34,7 @@ export const LoginTemplate = () => {
       .unwrap()
       .then(() => {
         toast.success("Đăng Nhập Thành Công");
-        if (storage.get("LogoutFromAdmin")) {
-          navigate("/admin");
-          storage.remove("LogoutFromAdmin");
-        } else {
-          navigate("/");
-        }
+        navigate("/");
       })
       .catch((error) => {
         handleError(error);
