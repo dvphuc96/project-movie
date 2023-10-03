@@ -10,7 +10,6 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { quanLyNguoiDungActions } from "store/quanLyNguoiDung";
 import { useDispatch } from "react-redux";
-import { storage } from "utils";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -22,51 +21,58 @@ export const AdminLayout = () => {
   const dispatch = useDispatch();
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={sideBar}
-        />
-        <DivLogout>
-          <button
-            onClick={() => {
-              dispatch(quanLyNguoiDungActions.logOut("logOut"));
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="demo-logo-vertical relative flex items-center justify-center h-[60px]">
+            <p className="font-700 text-20 text-white">
+              <span className="text-[var(--primary-color)]">CYBER</span>
+              MOVIE
+            </p>
+          </div>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            items={sideBar}
+          />
+          <DivLogout>
+            <button
+              onClick={() => {
+                dispatch(quanLyNguoiDungActions.logOut("logOut"));
+              }}
+            >
+              <LoginOutlined />
+              <span>Logout</span>
+            </button>
+          </DivLogout>
+        </Sider>
+        <Layout>
+          <Header style={{ padding: 0, background: colorBgContainer }}>
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+          </Header>
+          <Content
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+              minHeight: 280,
+              background: colorBgContainer,
             }}
           >
-            <LoginOutlined />
-            <span>Logout</span>
-          </button>
-        </DivLogout>
-      </Sider>
-      <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
-        >
-          <Outlet />
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Movie Design ©2023 Created dvphuc
-        </Footer>
+            <Outlet />
+          </Content>
+          <Footer style={{ textAlign: "center" }}>
+            Movie Design ©2023 Created dvphuc
+          </Footer>
+        </Layout>
       </Layout>
     </Layout>
   );

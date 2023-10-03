@@ -1,5 +1,4 @@
 import { PATH } from "constant";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { DanhSachPhim } from "types";
 import { formatDate } from "utils";

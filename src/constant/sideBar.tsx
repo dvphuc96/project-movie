@@ -1,24 +1,37 @@
 import {
-  UploadOutlined,
+  DatabaseOutlined,
+  FieldTimeOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { ItemType, MenuItemType } from "antd/es/menu/hooks/useItems";
+import type { MenuProps } from "antd";
+type MenuItem = Required<MenuProps>["items"][number];
 
-export const sideBar: ItemType<MenuItemType>[] = [
-  {
-    key: "1",
-    icon: <UserOutlined />,
-    label: "nav 1",
-  },
-  {
-    key: "2",
-    icon: <VideoCameraOutlined />,
-    label: "nav 2",
-  },
-  {
-    key: "3",
-    icon: <UploadOutlined />,
-    label: "nav 3",
-  },
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[]
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem;
+}
+export const menuHeader: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
+  key,
+  label: `nav ${key}`,
+}));
+
+export const sideBar: MenuItem[] = [
+  getItem("User", "1", <UserOutlined />),
+  getItem("Film", "sub1", <DatabaseOutlined />, [
+    getItem("Film List", "2"),
+    getItem("Add Film", "3"),
+    getItem("Edit Film", "4"),
+  ]),
+  getItem("Showtime", "sub2", <FieldTimeOutlined />, [
+    getItem("Add showtime", "5"),
+  ]),
 ];
