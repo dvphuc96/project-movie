@@ -1,7 +1,18 @@
 import { RouteObject } from "react-router-dom";
 import { PATH } from "constant";
 import { AdminLayout, AuthLayout, MainLayout } from "components";
-import { Home, Login, Register, MovieDetail, Account, Cinema, Purchase } from "pages";
+import {
+  Home,
+  Login,
+  Register,
+  MovieDetail,
+  Account,
+  Cinema,
+  Purchase,
+  FilmList,
+  FilmCreate,
+  FilmUpdate,
+} from "pages";
 import { AdminGuard, AuthGuard } from "guards";
 
 export const router: RouteObject[] = [
@@ -44,21 +55,37 @@ export const router: RouteObject[] = [
           <AuthGuard>
             <Purchase />
           </AuthGuard>
-        )
+        ),
       },
     ],
   },
   {
-    path: '/admin',
+    path: "/admin",
     element: (
       <AdminGuard>
-        <AdminLayout/>
+        <AdminLayout />
       </AdminGuard>
     ),
     children: [
       {
         index: true,
-      }
-    ]
-  }
+      },
+      {
+        children: [
+          {
+            path: PATH.film,
+            element: <FilmList />,
+          },
+          {
+            path: PATH.createFilm,
+            element: <FilmCreate />,
+          },
+          {
+            path: PATH.updateFilm,
+            element: <FilmUpdate />,
+          },
+        ],
+      },
+    ],
+  },
 ];

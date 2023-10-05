@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { LoginSchema, LoginSchemaType } from "schema";
 import { RootState, useAppDispatch } from "store";
 import { loginThunk } from "store/quanLyNguoiDung/thunk";
-import { handleError, storage } from "utils";
+import { handleError } from "utils";
 
 export const LoginTemplate = () => {
   const navigate = useNavigate();

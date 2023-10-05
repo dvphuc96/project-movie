@@ -4,6 +4,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
+import { NavLink } from "react-router-dom";
+import { PATH } from "./config";
 type MenuItem = Required<MenuProps>["items"][number];
 
 function getItem(
@@ -19,7 +21,7 @@ function getItem(
     label,
   } as MenuItem;
 }
-export const menuHeader: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
+export const menuHeader: MenuProps["items"] = ["1", "2", "3"].map((key) => ({
   key,
   label: `nav ${key}`,
 }));
@@ -27,9 +29,24 @@ export const menuHeader: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
 export const sideBar: MenuItem[] = [
   getItem("User", "1", <UserOutlined />),
   getItem("Film", "sub1", <DatabaseOutlined />, [
-    getItem("Film List", "2"),
-    getItem("Add Film", "3"),
-    getItem("Edit Film", "4"),
+    getItem(
+      <div>
+        <NavLink to={PATH.film}>Film List</NavLink>
+      </div>,
+      "2"
+    ),
+    getItem(
+      <div>
+        <NavLink to={PATH.createFilm}>Add Film</NavLink>
+      </div>,
+      "3"
+    ),
+    getItem(
+      <div>
+        <NavLink to={PATH.updateFilm}>Edit Film</NavLink>
+      </div>,
+      "4"
+    ),
   ]),
   getItem("Showtime", "sub2", <FieldTimeOutlined />, [
     getItem("Add showtime", "5"),

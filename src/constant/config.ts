@@ -6,4 +6,7 @@ export const PATH = {
     purchase: '/purchase/:id', // id = maLichChieu
     cinema: '/cinema',
     admin: '/admin',
+    film: '/admin/film',
+    createFilm: '/admin/film/create',
+    updateFilm: '/admin/film/update'
 }

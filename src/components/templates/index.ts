@@ -6,3 +6,4 @@ export * from "./account";
 export * from "./cumRapChieu";
 export * from "./cinema";
 export * from "./purchase";
+export * from "./admin";
