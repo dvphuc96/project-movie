@@ -1,36 +1,62 @@
-import { PlusOutlined } from "@ant-design/icons";
-import {
-  Input,
-  Form,
-  InputNumber,
-  Switch,
-  Upload,
-  Button,
-  DatePicker,
-} from "antd";
+import { Input, Form, InputNumber, Switch, Button } from "antd";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFilmSchema, RegisterFilmSchemaType } from "schema";
-import dayjs from "dayjs";
-
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
+import { DatePicker } from "components";
+import { useState } from "react";
+import { handleError } from "utils";
+import { quanLyPhimService } from "services";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "constant";
 
 export const FilmCreateTemplate = () => {
+  const [imgSrc, setImgSrc] = useState<string | ArrayBuffer | null>("");
+  const navigate = useNavigate();
   const {
     handleSubmit,
+    register,
     control,
     formState: { errors },
   } = useForm<RegisterFilmSchemaType>({
     mode: "all",
     resolver: zodResolver(RegisterFilmSchema),
   });
-  const onSubmit: SubmitHandler<RegisterFilmSchemaType> = (values) => {
-    console.log(values);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChangeFile = (event: React.FormEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement & {
+      files: FileList;
+    }
+    const file = target?.files[0];
+    if (
+      file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "image/gif" ||
+      file.type === "image/jpg"
+    ) {
+      const reader = new FileReader;
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImgSrc(e?.target?.result);
+      };
+    }
+  };
+  const onSubmit: SubmitHandler<RegisterFilmSchemaType> = async (values) => {
+    const formData = new FormData();
+    for(const key in values) {
+      if(key !== 'hinhAnh') {
+        formData.append(key, values[key])
+      } else {
+        formData.append('File', values.hinhAnh, values.hinhAnh.name)
+      }
+    }
+    try {
+      await quanLyPhimService.createMovie(formData);
+      toast.success("Tạo phim thành công!");
+      navigate(PATH.film);
+    } catch (errors) {
+      handleError(errors);
+    }
   };
   return (
     <>
@@ -86,16 +112,13 @@ export const FilmCreateTemplate = () => {
             control={control}
             render={({ field }) => {
               return (
-                <Input type="date" {...field}/>
-                // <DatePicker
-                //   ref={field.ref}
-                //   name={field.name}
-                //   onBlur={field.onBlur}
-                //   value={field.value ? dayjs(field.value) : undefined}
-                //   onChange={(date) => {
-                //     field.onChange(date ? date.valueOf() : undefined);
-                //   }}
-                // />
+                <DatePicker
+                  picker="date"
+                  format="DD/MM/YYYY"
+                  onChange={(_, dateString) => {
+                    field.onChange(dateString);
+                  }}
+                />
               );
             }}
           />
@@ -107,37 +130,46 @@ export const FilmCreateTemplate = () => {
         </Form.Item>
         <Form.Item label="Đang chiếu" valuePropName="checked">
           <Controller
-            name="DangChieu"
+            name="dangChieu"
             control={control}
-            render={({ field }) => <Switch checked={field.value} />}
+            defaultValue={false}
+            render={({ field }) => (
+              <Switch {...field} checked={!!field.value} />
+            )}
           />
-          {errors.DangChieu && (
+          {errors.dangChieu && (
             <p className="text-red-500 font-600 text-15 mt-10">
-              {errors?.DangChieu?.message}
+              {errors?.dangChieu?.message}
             </p>
           )}
         </Form.Item>
         <Form.Item label="Sắp chiếu" valuePropName="checked">
           <Controller
-            name="SapChieu"
+            name="sapChieu"
             control={control}
-            render={({ field }) => <Switch checked={field.value} />}
+            defaultValue={false}
+            render={({ field }) => (
+              <Switch {...field} checked={!!field.value} />
+            )}
           />
-          {errors.SapChieu && (
+          {errors.sapChieu && (
             <p className="text-red-500 font-600 text-15 mt-10">
-              {errors?.SapChieu?.message}
+              {errors?.sapChieu?.message}
             </p>
           )}
         </Form.Item>
         <Form.Item label="Hot" valuePropName="checked">
           <Controller
-            name="Hot"
+            name="hot"
             control={control}
-            render={({ field }) => <Switch checked={field.value} />}
+            defaultValue={false}
+            render={({ field }) => (
+              <Switch {...field} checked={!!field.value} />
+            )}
           />
-          {errors.Hot && (
+          {errors.hot && (
             <p className="text-red-500 font-600 text-15 mt-10">
-              {errors?.Hot?.message}
+              {errors?.hot?.message}
             </p>
           )}
         </Form.Item>
@@ -153,22 +185,20 @@ export const FilmCreateTemplate = () => {
             </p>
           )}
         </Form.Item>
-        <Form.Item
-          label="Upload"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          </Upload>
+        <Form.Item label="Hình ảnh">
+          <input
+            type="file"
+            {...register("hinhAnh")}
+            accept="image/jpeg, image/png, image/gif, image/jpg"
+            onChange={handleChangeFile}
+          />
+          <br />
+          <img style={{ width: 150, height: 150 }} src={imgSrc} alt="..." />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <button type="submit">
             Submit
-          </Button>
+          </button>
         </Form.Item>
       </Form>
     </>

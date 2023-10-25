@@ -1,4 +1,5 @@
 import { apiInstance } from "constant/apiInstance";
+import { RegisterFilmSchemaType } from "schema";
 import { Banner, Movie, MovieListPagination } from "types";
 
 const api = apiInstance({
@@ -16,4 +17,6 @@ export const quanLyPhimService = {
       `/LayDanhSachPhimPhanTrang?${query}`
     ),
   deleteMovie: (maPhim: number) => api.delete(`/XoaPhim?MaPhim=${maPhim}`),
+  createMovie: (data: RegisterFilmSchemaType) =>
+    api.post("/ThemPhimUploadHinh", data),
 };

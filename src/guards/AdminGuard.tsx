@@ -10,7 +10,6 @@ interface MiddleWare {
 
 export const AdminGuard = (props: MiddleWare) => {
   const { user, accessToken } = useAuth();
-  console.log(user);
   const navigate = useNavigate();
   if (!accessToken) {
     navigate(PATH.login);
