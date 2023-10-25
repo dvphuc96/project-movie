@@ -18,3 +18,11 @@ export type Banner = {
   maPhim: number;
   hinhAnh: string;
 };
+
+export type MovieListPagination = {
+  currentPage: number;
+  count: number;
+  totalPages: number;
+  totalCount: number;
+  items: Movie[];
+};

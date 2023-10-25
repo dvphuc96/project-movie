@@ -10,6 +10,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { quanLyNguoiDungActions } from "store/quanLyNguoiDung";
 import { useDispatch } from "react-redux";
+import { RootDispatch } from "store";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -18,7 +19,7 @@ export const AdminLayout = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<RootDispatch>();
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Layout>

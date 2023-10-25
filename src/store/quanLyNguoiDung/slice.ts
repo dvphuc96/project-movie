@@ -1,6 +1,6 @@
 // rxs
 
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { UserByAccessToken, UserLogin } from "types";
 import { getUserByAccessTokenThunk, loginThunk } from "./thunk";
 import { storage } from "utils";
@@ -34,7 +34,7 @@ const quanLyNguoiDungSlice = createSlice({
     //   state.userLogin = action.payload;
     // },
   },
-  extraReducers(builder) {
+  extraReducers(builder:ActionReducerMapBuilder<QuanLyNguoiDungInitialState>) {
     // xử lý action bất đồng bộ (api)
     builder
       .addCase(loginThunk.pending, (state) => {

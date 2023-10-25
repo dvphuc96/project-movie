@@ -41,14 +41,8 @@ export const sideBar: MenuItem[] = [
       </div>,
       "3"
     ),
-    getItem(
-      <div>
-        <NavLink to={PATH.updateFilm}>Edit Film</NavLink>
-      </div>,
-      "4"
-    ),
   ]),
   getItem("Showtime", "sub2", <FieldTimeOutlined />, [
-    getItem("Add showtime", "5"),
+    getItem("Add showtime", "4"),
   ]),
 ];

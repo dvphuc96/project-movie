@@ -8,5 +8,5 @@ export const PATH = {
     admin: '/admin',
     film: '/admin/film',
     createFilm: '/admin/film/create',
-    updateFilm: '/admin/film/update'
+    updateFilm: '/admin/film/update/:id'
 }

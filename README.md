@@ -40,6 +40,7 @@ extension: vscode-styled-components
 
 <!-- react-query -->
 18. yarn add @tanstack/react-query
+18-5. yarn add @tanstack/react-query-devtools
 
 <!-- icons -->
 19. yarn add @ant-design/icons

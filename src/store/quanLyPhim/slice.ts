@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
 import { Banner, Movie, MovieDetail } from "types";
 import { getBannerListThunk, getMovieListThunk } from "./thunk";
 
@@ -15,7 +15,7 @@ const quanLyPhimSlice = createSlice({
   name: "quanLyPhim",
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers(builder:ActionReducerMapBuilder<QuanLyPhimInitialState>) {
     builder
       // getMovieListThunk
       .addCase(getMovieListThunk.pending, (state) => {

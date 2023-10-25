@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
 import { Cinema, LstCumRap, MovieDetail } from "types";
 import {
   getCinemaListThunk,
@@ -19,13 +19,13 @@ const quanLyRapSlice = createSlice({
   name: "quanLyRap",
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers(builder:ActionReducerMapBuilder<QuanLyPhimInitialState>) {
     builder
       // getMovieDetailThunk
-      .addCase(getMovieDetailThunk.pending, (state) => {
+      .addCase(getMovieDetailThunk.pending, (state:QuanLyPhimInitialState) => {
         state.isFetchingMovieDetail = true;
       })
-      .addCase(getMovieDetailThunk.fulfilled, (state, { payload }) => {
+      .addCase(getMovieDetailThunk.fulfilled, (state: QuanLyPhimInitialState, { payload }) => {
         state.movieDetail = payload;
         state.isFetchingMovieDetail = false;
       })

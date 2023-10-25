@@ -37,13 +37,13 @@ export const Input = ({
         placeholder={placeholder}
         className="p-10 w-full rounded-6 bg-[#333] mt-8 text-white"
         // validate thuần của react hook form
-        //   {...register("taiKhoan", {
-        //     required: "Vui lòng nhập tài khoản",
-        //     maxLength: {
-        //         value: 20,
-        //         message: "Không nhập quá 20 ký tự",
-        //     },
-        //   })}
+          // {...register("taiKhoan", {
+          //   required: "Vui lòng nhập tài khoản",
+          //   maxLength: {
+          //       value: 20,
+          //       message: "Không nhập quá 20 ký tự",
+          //   },
+          // })}
         {...register?.(name)}
         disabled={disabled}
       />

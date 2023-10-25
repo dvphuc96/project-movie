@@ -10,3 +10,4 @@ export * from "./Skeleton";
 export * from "./Tabs";
 export * from "./ModalVideo";
 export * from "./Loading";
+export * from "./DatePicker";

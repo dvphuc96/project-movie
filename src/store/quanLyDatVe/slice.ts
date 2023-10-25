@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
 import { ThongTinPhongVe } from "types";
 import { getTicketRoomListThunk } from "store/quanLyDatVe";
 
@@ -12,7 +12,7 @@ const quanLyDatVeSlice = createSlice({
   name: "quanLyDatVe",
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers(builder: ActionReducerMapBuilder<QuanLyDatVeInitialState>) {
     builder
       .addCase(getTicketRoomListThunk.pending, (state) => {
         state.isFetchingTicketRoomList = true;
