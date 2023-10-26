@@ -22,7 +22,6 @@ export const FilmCreateTemplate = () => {
     mode: "all",
     resolver: zodResolver(RegisterFilmSchema),
   });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChangeFile = (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement & {
       files: FileList;
