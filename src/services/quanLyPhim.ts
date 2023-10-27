@@ -17,6 +17,6 @@ export const quanLyPhimService = {
       `/LayDanhSachPhimPhanTrang?${query}`
     ),
   deleteMovie: (maPhim: number) => api.delete(`/XoaPhim?MaPhim=${maPhim}`),
-  createMovie: (data: RegisterFilmSchemaType) =>
+  createMovie: (data: RegisterFilmSchemaType | FormData) =>
     api.post("/ThemPhimUploadHinh", data),
 };

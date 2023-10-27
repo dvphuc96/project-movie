@@ -46,7 +46,7 @@ export const FilmCreateTemplate = () => {
       if(key !== 'hinhAnh') {
         formData.append(key, values[key])
       } else {
-        formData.append('File', values.hinhAnh, values.hinhAnh.name)
+        formData.append('File', values.hinhAnh[0], values.hinhAnh.name)
       }
     }
     try {
@@ -172,7 +172,7 @@ export const FilmCreateTemplate = () => {
             </p>
           )}
         </Form.Item>
-        <Form.Item label="Số sao">
+        <Form.Item label="Đánh giá">
           <Controller
             name="danhGia"
             control={control}
@@ -195,9 +195,9 @@ export const FilmCreateTemplate = () => {
           <img style={{ width: 150, height: 150 }} src={imgSrc} alt="..." />
         </Form.Item>
         <Form.Item>
-          <button type="submit">
-            Submit
-          </button>
+          <Button type="primary" htmlType="submit">
+            Thêm Phim
+          </Button>
         </Form.Item>
       </Form>
     </>
