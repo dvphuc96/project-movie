@@ -23,11 +23,11 @@ const queryClient = new QueryClient({
    * TanStack Query automatically requests fresh data for you in the background.
    * You can disable this globally or per-query using the refetchOnWindowFocus option:
    */
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
+  // defaultOptions: {
+  //   queries: {
+  //     refetchOnWindowFocus: false,
+  //   },
+  // },
 });
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>

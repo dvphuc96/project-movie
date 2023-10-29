@@ -10,7 +10,7 @@ export type MovieDetail = {
   hot: boolean;
   dangChieu: boolean;
   sapChieu: boolean;
-  ngayKhoiChieu: Date;
+  ngayKhoiChieu: string;
   danhGia: number;
 };
 

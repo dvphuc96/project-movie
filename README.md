@@ -27,9 +27,9 @@ extension: vscode-styled-components
 10. qs
 
 <!-- Form -->
-11. react-hook-form
-12. zod
-13. @resolverhook
+11. react-hook-form (yarn add react-hook-form)
+12. zod (yarn add zod)
+13. @resolverhook (yarn add @hookform/resolvers)
 14. react-toastify
 
 15. @types/node (phục vụ import)

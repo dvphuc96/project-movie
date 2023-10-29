@@ -1,7 +1,7 @@
 import { Input, Form, InputNumber, Switch, Button } from "antd";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterFilmSchema, RegisterFilmSchemaType } from "schema";
+import { CreateOrUpdateFilmSchema, CreateOrUpdateFilmSchemaType } from "schema";
 import { DatePicker } from "components";
 import { useState } from "react";
 import { handleError } from "utils";
@@ -18,14 +18,14 @@ export const FilmCreateTemplate = () => {
     register,
     control,
     formState: { errors },
-  } = useForm<RegisterFilmSchemaType>({
+  } = useForm<CreateOrUpdateFilmSchemaType>({
     mode: "all",
-    resolver: zodResolver(RegisterFilmSchema),
+    resolver: zodResolver(CreateOrUpdateFilmSchema),
   });
   const handleChangeFile = (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement & {
       files: FileList;
-    }
+    };
     const file = target?.files[0];
     if (
       file.type === "image/jpeg" ||
@@ -33,20 +33,21 @@ export const FilmCreateTemplate = () => {
       file.type === "image/gif" ||
       file.type === "image/jpg"
     ) {
-      const reader = new FileReader;
+      const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e) => {
         setImgSrc(e?.target?.result);
       };
     }
   };
-  const onSubmit: SubmitHandler<RegisterFilmSchemaType> = async (values) => {
+  const onSubmit: SubmitHandler<CreateOrUpdateFilmSchemaType> = async (values) => {
+    values.maNhom = "GP01";
     const formData = new FormData();
-    for(const key in values) {
-      if(key !== 'hinhAnh') {
-        formData.append(key, values[key])
+    for (const key in values) {
+      if (key !== "hinhAnh") {
+        formData.append(key, values[key]);
       } else {
-        formData.append('File', values.hinhAnh[0], values.hinhAnh.name)
+        formData.append("File", values.hinhAnh[0], values.hinhAnh.name);
       }
     }
     try {

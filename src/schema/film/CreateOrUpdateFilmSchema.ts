@@ -1,6 +1,12 @@
 import { z } from "zod";
 
-export const RegisterFilmSchema = z.object({
+// const dateSchema = z.preprocess((arg) => {
+//   if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+// }, z.date());
+
+export const CreateOrUpdateFilmSchema = z.object({
+  maPhim: z.number().optional(),
+  maNhom: z.string(),
   tenPhim: z.string().nonempty("Vui lòng nhập tên phim"),
   trailer: z.string().nonempty("Vui lòng nhập trailer"),
   moTa: z.string().nonempty("Vui lòng nhập mô tả"),
@@ -18,4 +24,4 @@ export const RegisterFilmSchema = z.object({
   hinhAnh: z.any(),
 });
 
-export type RegisterFilmSchemaType = z.infer<typeof RegisterFilmSchema>;
+export type CreateOrUpdateFilmSchemaType = z.infer<typeof CreateOrUpdateFilmSchema>;

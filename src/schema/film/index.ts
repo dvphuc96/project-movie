@@ -1,1 +1,1 @@
-export * from "./RegisterFilmSchema"
+export * from "./CreateOrUpdateFilmSchema"
