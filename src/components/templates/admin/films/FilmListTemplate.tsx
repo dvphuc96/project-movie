@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Table } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue } from "antd/es/table/interface";
@@ -101,6 +101,10 @@ const handleDeleteFilm = async (film: Movie) => {
   try {
     await quanLyPhimService.deleteMovie(film.maPhim);
     toast.success("Xoá phim thành công!");
+    queryClient.resetQueries({ 
+      queryKey: ["quanLyPhim/LayDanhSachPhimPhanTrang"], 
+      exact: true 
+    })
     queryClient.invalidateQueries({
       queryKey: ["quanLyPhim/LayDanhSachPhimPhanTrang"],
       stale: true,
@@ -111,7 +115,7 @@ const handleDeleteFilm = async (film: Movie) => {
   }
 };
 const getRandomuserParams = (params: TableParams) => ({
-  maNhom: "GP01",
+  maNhom: "GP09",
   soTrang: params.pagination?.current,
   soPhanTuTrenTrang: params.pagination?.pageSize,
 });

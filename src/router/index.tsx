@@ -1,6 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 import { PATH } from "constant";
-import { AdminLayout, AuthLayout, MainLayout } from "components";
+import { AuthLayout, Loading, MainLayout } from "components";
 import {
   Home,
   Login,
@@ -14,10 +16,16 @@ import {
   FilmUpdate,
 } from "pages";
 import { AdminGuard, AuthGuard } from "guards";
-
+const AdminLayout: React.LazyExoticComponent<() => JSX.Element> = lazy(() =>
+  import("../components").then(({ AdminLayout }) => ({ default: AdminLayout }))
+);
 export const router: RouteObject[] = [
   {
-    element: <AuthLayout />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AuthLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: PATH.login,

@@ -1,23 +1,22 @@
 import { Banner, Card, Loading } from "components";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "store";
+import { useAppDispatch } from "store";
 import { getBannerListThunk, getMovieListThunk } from "store/quanLyPhim";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "constant";
 import { handleLoading } from "utils";
 import { Movie } from "types";
-import { useQueryParams } from "hooks";
+import { useQueryParams, useAppSelector } from "hooks";
 
 export const HomeTemplate = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
   const [queryParams, setQueryParams] = useQueryParams();
-  const { movieList, isFetchingMovieList, bannerList } = useSelector(
-    (state: RootState) => state.quanLyPhim
+  const { movieList, isFetchingMovieList, bannerList } = useAppSelector(
+    (state) => state.quanLyPhim
   );
   const movieSearch = movieList?.filter((element: Movie) =>
     element.tenPhim.toLowerCase().includes(queryParams?.tenPhim?.toLowerCase())

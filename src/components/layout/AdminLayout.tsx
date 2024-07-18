@@ -4,8 +4,8 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme } from "antd";
-import { sideBar } from "constant";
+import { Layout, Button, theme } from "antd";
+import { MenuHamber } from "constant";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { quanLyNguoiDungActions } from "store/quanLyNguoiDung";
@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { RootDispatch } from "store";
 
 const { Header, Sider, Content, Footer } = Layout;
-
 export const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const {
@@ -30,12 +29,7 @@ export const AdminLayout = () => {
               MOVIE
             </p>
           </div>
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            items={sideBar}
-          />
+          <MenuHamber/>
           <DivLogout>
             <button
               onClick={() => {

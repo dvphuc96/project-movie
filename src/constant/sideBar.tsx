@@ -1,10 +1,11 @@
+import React from "react";
 import {
   DatabaseOutlined,
   FieldTimeOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { NavLink } from "react-router-dom";
+import { Menu, type MenuProps } from "antd";
+import { NavLink, useLocation } from "react-router-dom";
 import { PATH } from "./config";
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -21,12 +22,8 @@ function getItem(
     label,
   } as MenuItem;
 }
-export const menuHeader: MenuProps["items"] = ["1", "2", "3"].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
 
-export const sideBar: MenuItem[] = [
+const items: MenuItem[] = [
   getItem("User", "1", <UserOutlined />),
   getItem("Film", "sub1", <DatabaseOutlined />, [
     getItem(
@@ -46,3 +43,16 @@ export const sideBar: MenuItem[] = [
     getItem("Add showtime", "4"),
   ]),
 ];
+
+export const MenuHamber: React.FC = () => {
+  const location = useLocation();
+
+  return (
+    <Menu
+      theme="dark"
+      mode="inline"
+      defaultSelectedKeys={[location.pathname]}
+      items={items}
+    />
+  );
+};
